@@ -1,0 +1,467 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+
+   <extension
+         point="org.eclipse.ui.editors">
+      <editor
+            class="de.agra.lips.editor.editors.NLPEditor"
+            contributorClass="org.eclipse.ui.texteditor.BasicTextEditorActionContributor"
+            extensions="lips"
+            icon="icons/set/resized/Discussion.png"
+            id="de.agra.lips.editor.editors.NLPEditor"
+            name="Lips Specification Editor">
+      </editor>
+   </extension>
+   <extension
+         point="org.eclipse.ui.views">
+      <category
+            id="de.agra.lips.editor.categories.nlp"
+            name="NLP">
+      </category>
+      <view
+            category="de.agra.lips.editor.categories.nlp"
+            class="de.agra.lips.editor.views.DependencyGraphView"
+            id="de.agra.lips.editor.views.dependencygraph"
+            icon="icons/typeddeps.ico"
+            name="Dependency Graph"
+            restorable="true">
+      </view>
+      <view
+            category="de.agra.lips.editor.categories.nlp"
+            class="de.agra.lips.editor.views.PhraseStructureTreeView"
+            id="de.agra.lips.editor.views.pst"
+            name="Phrase Structure Tree"
+            icon="icons/tree.ico"
+            restorable="true">
+      </view>
+      <view
+            category="de.agra.lips.editor.categories.nlp"
+            class="de.agra.lips.editor.views.WordNetView"
+            icon="icons/wordnet.gif"
+            id="de.agra.lips.editor.views.wordnetview"
+            name="WordNet"
+            restorable="true">
+      </view>
+      <view
+            category="de.agra.lips.editor.categories.nlp"
+            class="de.agra.lips.editor.views.NounClassificationView"
+            icon="icons/set/resized/Write Document.png"
+            id="de.agra.lips.editor.views.nounclassificationview"
+            name="Noun Classification"
+            restorable="true">
+      </view>
+   </extension>
+   <extension
+         point="org.eclipse.ui.menus">
+      <menuContribution
+            allPopups="false"
+            locationURI="menu:org.eclipse.ui.main.menu?after=additions">
+         <menu
+               label="NLP"
+               mnemonic="g">
+            <command
+                  commandId="de.agra.lips.editor.commands.wordnet"
+                  icon="icons/wordnet.gif"
+                  label="WordNet"
+                  mnemonic="W"
+                  style="push">
+            </command>
+            <command
+                  commandId="de.agra.lips.editor.commands.parsestructure"
+                  icon="icons/typeddeps.ico"
+                  label="Dependency graph"
+                  style="push">
+               <parameter
+                     name="de.agra.lips.editor.commands.parameters.strucview"
+                     value="de.agra.lips.editor.views.dependencygraph">
+               </parameter>
+            </command>
+            <command
+                  commandId="de.agra.lips.editor.commands.parsestructure"
+                  icon="icons/tree.ico"
+                  label="Phrase structure tree (PST)"
+                  style="push">
+               <parameter
+                     name="de.agra.lips.editor.commands.parameters.strucview"
+                     value="de.agra.lips.editor.views.pst">
+               </parameter>
+            </command>
+         </menu>
+      </menuContribution>
+      <menuContribution
+            allPopups="false"
+            locationURI="toolbar:de.agra.lips.editor.views.dependencygraph">
+         <command
+               commandId="de.agra.lips.editor.commands.zoom"
+               icon="icons/set/resized/Add Green Button.png"
+               label="Zoom in"
+               style="push"
+               tooltip="Zoom In">
+            <parameter
+                  name="de.agra.lips.editor.commands.parameters.zoomview"
+                  value="de.agra.lips.editor.views.dependencygraph">
+            </parameter>
+            <parameter
+                  name="de.agra.lips.editor.commands.parameters.zoomtype"
+                  value="zoomin">
+            </parameter>
+         </command>
+         <command
+               commandId="de.agra.lips.editor.commands.zoom"
+               icon="icons/set/resized/Minus Green Button.png"
+               label="Zoom out"
+               style="push"
+               tooltip="Zoom out">
+            <parameter
+                  name="de.agra.lips.editor.commands.parameters.zoomview"
+                  value="de.agra.lips.editor.views.dependencygraph">
+            </parameter>
+            <parameter
+                  name="de.agra.lips.editor.commands.parameters.zoomtype"
+                  value="zoomout">
+            </parameter>
+         </command>
+         <command
+               commandId="de.agra.lips.editor.commands.zoom"
+               icon="icons/set/resized/Fullscreen.png"
+               label="Fit to canvas"
+               style="push"
+               tooltip="Fit to view">
+            <parameter
+                  name="de.agra.lips.editor.commands.parameters.zoomview"
+                  value="de.agra.lips.editor.views.dependencygraph">
+            </parameter>
+            <parameter
+                  name="de.agra.lips.editor.commands.parameters.zoomtype"
+                  value="fittocanvas">
+            </parameter>
+         </command>
+         <separator
+               name="de.agra.lips.editor.menus.separatordepgraph"
+               visible="true">
+         </separator>
+         <command
+               commandId="de.agra.lips.editor.commands.saveparsedstructureimage"
+               icon="icons/set/resized/Get Document.png"
+               label="Save TypedDep Image"
+               style="push"
+               tooltip="Save typed dependency graph to file">
+            <parameter
+                  name="de.agra.lips.editor.commands.parameters.saveview"
+                  value="de.agra.lips.editor.views.dependencygraph">
+            </parameter>
+            <parameter
+                  name="de.agra.lips.editor.commands.parameters.parsedstructurefilename"
+                  value="dependency_graph.png">
+            </parameter>
+         </command>
+      </menuContribution>
+      <menuContribution
+            allPopups="false"
+            locationURI="toolbar:de.agra.lips.editor.views.pst">
+         <command
+               commandId="de.agra.lips.editor.commands.zoom"
+               icon="icons/set/resized/Add Green Button.png"
+               label="Zoom in"
+               style="push"
+               tooltip="Zoom in">
+            <parameter
+                  name="de.agra.lips.editor.commands.parameters.zoomview"
+                  value="de.agra.lips.editor.views.pst">
+            </parameter>
+            <parameter
+                  name="de.agra.lips.editor.commands.parameters.zoomtype"
+                  value="zoomin">
+            </parameter>
+         </command>
+         <command
+               commandId="de.agra.lips.editor.commands.zoom"
+               icon="icons/set/resized/Minus Green Button.png"
+               label="Zoom out"
+               style="push"
+               tooltip="Zoom out">
+            <parameter
+                  name="de.agra.lips.editor.commands.parameters.zoomview"
+                  value="de.agra.lips.editor.views.pst">
+            </parameter>
+            <parameter
+                  name="de.agra.lips.editor.commands.parameters.zoomtype"
+                  value="zoomout">
+            </parameter>
+         </command>
+         <command
+               commandId="de.agra.lips.editor.commands.zoom"
+               icon="icons/set/resized/Fullscreen.png"
+               label="Fit to canvas"
+               style="push"
+               tooltip="Fit to view">
+            <parameter
+                  name="de.agra.lips.editor.commands.parameters.zoomview"
+                  value="de.agra.lips.editor.views.pst">
+            </parameter>
+            <parameter
+                  name="de.agra.lips.editor.commands.parameters.zoomtype"
+                  value="fittocanvas">
+            </parameter>
+         </command>
+         <separator
+               name="de.agra.lips.editor.menus.separatorpst"
+               visible="true">
+         </separator>
+         <command
+               commandId="de.agra.lips.editor.commands.saveparsedstructureimage"
+               icon="icons/set/resized/Get Document.png"
+               label="Save PST Image"
+               style="push"
+               tooltip="Save phrase structure tree to file">
+            <parameter
+                  name="de.agra.lips.editor.commands.parameters.saveview"
+                  value="de.agra.lips.editor.views.pst">
+            </parameter>
+            <parameter
+                  name="de.agra.lips.editor.commands.parameters.parsedstructurefilename"
+                  value="phrase_structure_tree.png">
+            </parameter>
+         </command>
+      </menuContribution>
+      <menuContribution
+            allPopups="false"
+            locationURI="toolbar:de.agra.lips.editor.views.nounclassificationview">
+         <command
+               commandId="de.agra.lips.editor.commands.nounclassification"
+               icon="icons/set/resized/Remove.png"
+               label="Delete noun"
+               style="push"
+               tooltip="Delete noun">
+            <parameter
+                  name="de.agra.lips.editor.commands.parameters.classification.cmd"
+                  value="selection">
+            </parameter>
+         </command>
+         <command
+               commandId="de.agra.lips.editor.commands.nounclassification"
+               icon="icons/set/resized/Mr. Bomb.png"
+               label="Clear nouns"
+               style="push"
+               tooltip="Clear nouns">
+            <parameter
+                  name="de.agra.lips.editor.commands.parameters.classification.cmd"
+                  value="clear">
+            </parameter>
+         </command>
+         <command
+               commandId="de.agra.lips.editor.commands.nounclassification"
+               icon="icons/set/resized/Import Document.png"
+               label="Load nouns"
+               style="push"
+               tooltip="Loads classified nouns from a file">
+            <parameter
+                  name="de.agra.lips.editor.commands.parameters.classification.cmd"
+                  value="load">
+            </parameter>
+         </command>
+         <command
+               commandId="de.agra.lips.editor.commands.nounclassification"
+               icon="icons/set/resized/Export To Document.png"
+               label="Save nouns"
+               style="push"
+               tooltip="Stores classified nouns in a file">
+            <parameter
+                  name="de.agra.lips.editor.commands.parameters.classification.cmd"
+                  value="save">
+            </parameter>
+         </command>
+      </menuContribution>
+   </extension>
+   <extension
+         point="org.eclipse.ui.commands">
+      <command
+            defaultHandler="de.agra.lips.editor.commands.WordNetCommand"
+            description="Queries the wordnet dictionary"
+            id="de.agra.lips.editor.commands.wordnet"
+            name="WordNet">
+      </command>
+      <command
+            defaultHandler="de.agra.lips.editor.commands.ZoomCommand"
+            description="Implements the zooming of images"
+            id="de.agra.lips.editor.commands.zoom"
+            name="Zoom">
+         <commandParameter
+               id="de.agra.lips.editor.commands.parameters.zoomview"
+               name="Zoom which view"
+               optional="false">
+         </commandParameter>
+         <commandParameter
+               id="de.agra.lips.editor.commands.parameters.zoomtype"
+               name="How to zoom"
+               optional="false">
+         </commandParameter>
+      </command>
+      <command
+            defaultHandler="de.agra.lips.editor.commands.SaveParsedStructureImageCommand"
+            description="Saves the image of a parsed structure"
+            id="de.agra.lips.editor.commands.saveparsedstructureimage"
+            name="Save image">
+         <commandParameter
+               id="de.agra.lips.editor.commands.parameters.saveview"
+               name="View"
+               optional="false">
+         </commandParameter>
+         <commandParameter
+               id="de.agra.lips.editor.commands.parameters.parsedstructurefilename"
+               name="Filename for the parsed structure"
+               optional="true">
+         </commandParameter>
+      </command>
+      <command
+            defaultHandler="de.agra.lips.editor.commands.ParsedStructureCommand"
+            description="Parses a sentence to either a dependency graph or PST"
+            id="de.agra.lips.editor.commands.parsestructure"
+            name="Parse structure">
+         <commandParameter
+               id="de.agra.lips.editor.commands.parameters.strucview"
+               name="View"
+               optional="true">
+         </commandParameter>
+      </command>
+      <command
+            defaultHandler="de.agra.lips.editor.commands.NounClassificationViewCommand"
+            description="Deletes, stores and loads noun classifications"
+            id="de.agra.lips.editor.commands.nounclassification"
+            name="Noun classification view command">
+         <commandParameter
+               id="de.agra.lips.editor.commands.parameters.classification.cmd"
+               name="Noun"
+               optional="false">
+         </commandParameter>
+      </command>
+   </extension>
+   <extension
+         id="de.agra.lips.editor.markers.nounclassificationmarker"
+         name="Unclassifiable Noun"
+         point="org.eclipse.core.resources.markers">
+      <super
+            type="org.eclipse.core.resources.problemmarker">
+      </super>
+      <super
+            type="org.eclipse.core.resources.textmarker">
+      </super>ent>
+      <attribute
+            name="Noun Marker">
+      </attribute>
+   </extension>
+   <extension
+         point="org.eclipse.ui.bindings">
+      <key
+            commandId="de.agra.lips.editor.commands.parsestructure"
+            contextId="org.eclipse.ui.contexts.window"
+            schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+            sequence="M1+M3+P">
+         <parameter
+               id="de.agra.lips.editor.commands.parameters.strucview"
+               value="de.agra.lips.editor.views.pst">
+         </parameter>
+      </key>
+      <key
+            commandId="de.agra.lips.editor.commands.parsestructure"
+            contextId="org.eclipse.ui.contexts.window"
+            schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+            sequence="M1+M3+D">
+         <parameter
+               id="de.agra.lips.editor.commands.parameters.strucview"
+               value="de.agra.lips.editor.views.dependencygraph">
+         </parameter>
+      </key>
+      <key
+            commandId="de.agra.lips.editor.commands.wordnet"
+            contextId="org.eclipse.ui.contexts.window"
+            schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+            sequence="M1+M3+W">
+      </key>
+   </extension>
+   <extension
+         name="Noun Classification Error Quick Fix"
+         point="org.eclipse.ui.ide.markerResolution">
+      <markerResolutionGenerator
+            class="de.agra.lips.editor.markers.NLPQuickFixMarkerGenerator"
+            markerType="de.agra.lips.editor.markers.nounclassificationmarker">
+      </markerResolutionGenerator>
+   </extension>
+   <extension
+         point="org.eclipse.ui.workbench.texteditor.hyperlinkDetectorTargets">
+      <target
+            id="de.agra.lips.editor.editorTarget"
+            name="NLP Editor">
+         <context
+               type="org.eclipse.ui.texteditor.ITextEditor">
+         </context>
+      </target>
+   </extension>
+   <extension
+         point="org.eclipse.ui.workbench.texteditor.hyperlinkDetectors">
+      <hyperlinkDetector
+            activate="true"
+            class="de.agra.lips.editor.hyperlinks.ClassLinkDetector"
+            id="de.agra.lips.editor.hyperlinkDetector"
+            name="NLP Hyperlink Detector"
+            targetId="de.agra.lips.editor.editorTarget">
+      </hyperlinkDetector>
+   </extension>
+   <extension
+         point="org.eclipse.ui.newWizards">
+      <category
+            id="de.agra.lips.editor"
+            name="lips">
+      </category>
+      <wizard
+            category="de.agra.lips.editor"
+            class="de.agra.lips.editor.wizards.NewLipsFileWizard"
+            finalPerspective="de.agra.lips.editor.persectives.lips"
+            icon="icons/set/resized/Discussion.png"
+            id="de.agra.lips.editor.wizards.lipsspec"
+            name="New lips Specification"
+            preferredPerspectives="de.agra.lips.editor.persectives.lips"
+            project="false">
+      </wizard>
+      <wizard
+            category="de.agra.lips.editor"
+            class="de.agra.lips.editor.wizards.NewLipsProjectWizard"
+            finalPerspective="de.agra.lips.editor.persectives.lips"
+            icon="icons/set/resized/Discussion.png"
+            id="de.agra.lips.editor.wizards.lipsproject"
+            name="New lips Project"
+            preferredPerspectives="de.agra.lips.editor.persectives.lips"
+            project="true">
+      </wizard>
+   </extension>
+   <extension
+         point="org.eclipse.ui.perspectives">
+      <perspective
+            class="de.agra.lips.editor.perspectives.LipsPerspectiveFactory"
+            icon="icons/set/resized/Discussion.png"
+            id="de.agra.lips.editor.persectives.lips"
+            name="lips">
+      </perspective>
+   </extension>
+   <extension
+         point="org.eclipse.ui.preferencePages">
+      <page
+            class="de.agra.lips.editor.preferences.MainLipsPrefPage"
+            id="de.agra.lips.editor.prefpages.lipsmain"
+            name="lips">
+      </page>
+   </extension>
+	<extension
+   		point="org.eclipse.core.runtime.preferences">
+   		<initializer class="de.agra.lips.editor.preferences.PrefInitializer"/>
+	</extension>
+ <extension
+       point="org.eclipse.ui.editors.documentProviders">
+    <provider
+          class="de.agra.lips.editor.providers.LipsDocumentProvider"
+          extensions="lips"
+          id="de.agra.lips.editor.lipsdocumentprovider">
+    </provider>
+ </extension>
+</plugin>

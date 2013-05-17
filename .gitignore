@@ -1,6 +1,9 @@
-*.class
-
-# Package Files #
-*.jar
-*.war
-*.ear
+.metadata
+.settings
+README.html
+bin/
+xtend-gen/
+de.agra.lips.updatesite/*.jar
+de.agra.lips.updatesite/features
+de.agra.lips.updatesite/plugins
+de.agra.nlp/doc/
