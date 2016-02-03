@@ -5,10 +5,12 @@
 ### Installation
 
 1. Download a recent version of [Eclipse](http://www.eclipse.org/downloads/packages/eclipse-classic-422/junosr2)
-2. Install lips using *Help* > *Install New Software...*
-3. As installation URL (*Work with:*) enter: <http://www.informatik.uni-bremen.de/agra/lips>
-4. Follow the installation instructions
-5. At the end of the installation, Eclipse needs to be restarted
+2. Install an EMF legacy package using *Help* > *Install New Software...*
+3. As installation URL (*Work with:*) enter: <http://download.eclipse.org/ecoretools/updates/releases/2.0.0/luna/>
+4. Install lips using *Help* > *Install New Software...*
+5. As installation URL (*Work with:*) enter: <http://www.informatik.uni-bremen.de/agra/lips>
+6. Follow the installation instructions
+7. At the end of the installation, Eclipse needs to be restarted
 
 ### Optional Requirements
 
